@@ -24,7 +24,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 @keyframes grd{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .hero .sub{color:var(--sub);font-size:13px;margin-top:6px}
 .hero .badges{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
-.badge{background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--sub)}
+.badge{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;color:var(--text);transition:all .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.badge:hover{transform:translateY(-2px);background:rgba(255,255,255,.1)}
+.badge-dest{color:#ff6b8a;border-color:rgba(233,69,96,.3);background:rgba(233,69,96,.12)}
+.badge-tea{color:#fbbf24;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.12)}
+.badge-food{color:#c084fc;border-color:rgba(192,132,252,.3);background:rgba(192,132,252,.12)}
+.badge-drink{color:#38bdf8;border-color:rgba(56,189,248,.3);background:rgba(56,189,248,.12)}
 /* Tabs */
 .tabs{display:flex;position:sticky;top:0;z-index:100;background:rgba(10,10,20,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);padding:0 8px}
 .tab{flex:1;padding:14px 0;text-align:center;font-size:13px;font-weight:700;cursor:pointer;position:relative;color:var(--sub);transition:.3s}
@@ -146,7 +151,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 @keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .home-hero h1{font-size:32px;font-weight:800;background:linear-gradient(135deg,#bae6fd,#7dd3fc,#e0f2fe,#bae6fd);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:grd 6s ease infinite}
 .home-hero .sub{color:var(--sub);font-size:14px;margin-top:8px;line-height:1.6}
-.home-hero .badges{display:flex;justify-content:center;gap:8px;margin-top:16px;flex-wrap:wrap}
+.home-hero .badges{display:grid;grid-template-columns:repeat(2, 1fr);gap:12px;margin-top:20px;max-width:300px;margin-left:auto;margin-right:auto}
+.home-hero .badge{display:flex;align-items:center;justify-content:center;white-space:nowrap}
 .dest-section{position:relative;z-index:1;padding:0 20px 40px;max-width:600px;margin:0 auto}
 .dest-section-title{font-size:18px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .dest-section-title .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
@@ -363,6 +369,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 .food-stat{background:var(--glass);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px 14px;text-align:center;flex:1;min-width:80px}
 .food-stat .fs-num{font-size:22px;font-weight:800;background:linear-gradient(135deg,#e94560,#f5a623);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .food-stat .fs-label{font-size:10px;color:var(--sub);margin-top:2px}
+/* === 模块导航 === */
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1;padding:0 20px 30px;max-width:600px;margin:0 auto}
+.module-card{position:relative;border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 16px 22px;min-height:160px;background:var(--card);border:1px solid rgba(255,255,255,.06);text-align:center;opacity:0;transform:translateY(20px);animation:cardIn .5s ease forwards}
+.module-card:nth-child(1){animation-delay:.1s}.module-card:nth-child(2){animation-delay:.2s}.module-card:nth-child(3){animation-delay:.3s}.module-card:nth-child(4){animation-delay:.4s}
+.module-card::before{content:'';position:absolute;inset:0;opacity:.12;transition:opacity .3s}
+.module-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.module-card:hover::before{opacity:.22}
+.module-card:active{transform:scale(.96)}
+.module-card .mc-icon{font-size:42px;margin-bottom:10px;display:inline-block;transition:transform .3s}
+.module-card:hover .mc-icon{transform:scale(1.15)}
+.module-card .mc-title{font-size:18px;font-weight:800;color:var(--text);position:relative;z-index:1}
+.module-card .mc-desc{font-size:11px;color:var(--sub);margin-top:6px;line-height:1.5;position:relative;z-index:1}
+.module-card .mc-badge{position:absolute;top:12px;right:12px;font-size:10px;padding:3px 10px;border-radius:12px;font-weight:700;z-index:2}
+.mc-destinations::before{background:linear-gradient(135deg,#e94560,#f5a623)}
+.mc-tea::before{background:linear-gradient(135deg,#ff6b8a,#fbbf24)}
+.mc-drinks::before{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.mc-food::before{background:linear-gradient(135deg,#e94560,#c084fc)}
+.module-page{display:none;position:relative;z-index:1;padding:0 20px 40px;max-width:800px;margin:0 auto}
+.module-page.show{display:block;animation:fadeIn .35s ease}
+.module-back-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:20px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;margin-bottom:16px}
+.module-back-btn:hover{background:rgba(255,255,255,.14)}
+.module-back-btn:active{transform:scale(.95)}
+.module-back-btn svg{width:16px;height:16px}
+.module-section-title{font-size:20px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px}
 </style>
 </head>
 <body>
@@ -376,12 +406,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
   <h3 style="color:rgb(132, 203, 238)">李春波制作!!!!!!!</h3>
   <!-- <p class="sub">选择目的地，开启每一段精彩旅程 ✨</p> -->
   <div class="badges">
-    <span class="badge">&#128205; 多城市行程</span>
-    <span class="badge">&#128506; 支持导航</span>
-    <span class="badge">&#128202; 距离分析</span>
+    <span class="badge badge-dest">🗺️ 8座城市</span>
+    <span class="badge badge-tea">🥤 7家奶茶</span>
+    <span class="badge badge-food">🍜 14道美食</span>
+    <span class="badge badge-drink">🍺 酒精日记</span>
   </div>
 </div>
-<div class="dest-section">
+
+<!-- 模块导航入口 -->
+<div class="module-grid" id="moduleGrid">
+  <div class="module-card mc-destinations" onclick="openModule('destinations')">
+    <span class="mc-badge" style="background:rgba(233,69,96,.15);color:#ff6b8a">8城市</span>
+    <div class="mc-icon">🗺️</div>
+    <div class="mc-title">旅行目的地</div>
+    <div class="mc-desc">查看各城市行程攻略<br>打卡完成进度</div>
+  </div>
+  <div class="module-card mc-tea" onclick="openModule('tea')">
+    <span class="mc-badge" style="background:rgba(255,107,138,.15);color:#ff6b8a">7家店</span>
+    <div class="mc-icon">🥤</div>
+    <div class="mc-title">奶茶打卡</div>
+    <div class="mc-desc">50的私藏奶茶地图<br>记录每一杯的味道</div>
+  </div>
+  <div class="module-card mc-drinks" onclick="openModule('drinks')">
+    <span class="mc-badge" style="background:rgba(245,158,11,.15);color:#fbbf24">日记</span>
+    <div class="mc-icon">🍺</div>
+    <div class="mc-title">酒精日记</div>
+    <div class="mc-desc">微醺探索记录<br>每城市的酒馆足迹</div>
+  </div>
+  <div class="module-card mc-food" onclick="openModule('food')">
+    <span class="mc-badge" style="background:rgba(233,69,96,.15);color:#ff6b8a">14道美食</span>
+    <div class="mc-icon">🍜</div>
+    <div class="mc-title">美食打卡</div>
+    <div class="mc-desc">台湾经典美食清单<br>评分 + 一句话点评</div>
+  </div>
+</div>
+
+<!-- ====== 模块：旅行目的地 ====== -->
+<div class="module-page" id="module-destinations">
+<button class="module-back-btn" onclick="closeModule()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>返回首页</button>
+<div class="dest-section" style="padding:0;max-width:none">
   <div class="dest-section-title"><span class="dot"></span>未完成的目的地</div>
   <div class="dest-grid" id="uncompleted-dests">
  
@@ -531,8 +594,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
   <div class="dest-grid" id="completed-dests">
   </div>
 </div>
+</div><!-- end module-destinations -->
 
-<div class="guide-section">
+<!-- ====== 模块：奶茶打卡 ====== -->
+<div class="module-page" id="module-tea">
+<button class="module-back-btn" onclick="closeModule()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>返回首页</button>
+<div class="guide-section" style="padding:0;max-width:none">
   <div class="dest-section-title"><span class="dot" style="background:#ff6b8a"></span>🥤 50的私藏奶茶地图</div>
   <div class="tea-grid">
     <div class="tea-card" data-tea="50lan">
@@ -600,16 +667,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
     </div>
   </div>
 </div>
+</div><!-- end module-tea -->
 
-<div class="guide-section" style="margin-top: 24px;">
+<!-- ====== 模块：酒精日记 ====== -->
+<div class="module-page" id="module-drinks">
+<button class="module-back-btn" onclick="closeModule()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>返回首页</button>
+<div class="guide-section" style="padding:0;max-width:none;margin-top:0">
   <div class="dest-section-title"><span class="dot" style="background:#f59e0b"></span>🍺 酒精探索日记</div>
   <div class="drink-container" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:16px;">
       <div class="tea-add-btn" style="background:rgba(245,158,11,0.15); color:#fbbf24; border-color:rgba(245,158,11,0.3); font-size:13px; padding:10px 16px; border-radius:12px;" onclick="addDrinkRecord()">➕ 新增微醺记录 (城市 / 店名 / 酒名)</div>
       <div id="drink-records-list" style="margin-top: 16px; display:flex; flex-direction:column; gap:10px;"></div>
   </div>
 </div>
+</div><!-- end module-drinks -->
 
-<div class="guide-section" style="margin-top: 24px;">
+<!-- ====== 模块：美食打卡 ====== -->
+<div class="module-page" id="module-food">
+<button class="module-back-btn" onclick="closeModule()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>返回首页</button>
+<div class="guide-section" style="padding:0;max-width:none;margin-top:0">
   <div class="dest-section-title"><span class="dot" style="background:#e94560"></span>🍜 打卡美食日记</div>
   
   <!-- 统计栏 -->
@@ -693,6 +768,60 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
       <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('relu')">📸 打卡这道美食</div>
       <div class="food-records" id="food-records-relu"></div>
     </div>
+    <div class="food-card" data-food="yarou">
+      <div class="food-emoji">🦆</div>
+      <div class="food-name">鸭肉饭</div>
+      <div class="food-loc">台南/嘉义</div>
+      <div class="food-desc">鲜嫩鸭肉切丝铺满白饭，淋上特制卤汁，肉香四溢。台南古早味代表，便宜又大碗！</div>
+      <div class="food-tag" style="background:rgba(233,69,96,.1);color:#ff6b8a">⭐ 重点推荐</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('yarou')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-yarou"></div>
+    </div>
+    <div class="food-card" data-food="cuobing">
+      <div class="food-emoji">🍧</div>
+      <div class="food-name">挫冰</div>
+      <div class="food-loc">全台冰店/夜市</div>
+      <div class="food-desc">绵密刨冰堆成山，自选配料红豆、芋圆、仙草、珍珠…淋上炼乳或黑糖，夏天的救赎！</div>
+      <div class="food-tag" style="background:rgba(56,189,248,.1);color:#38bdf8">消暑神器</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('cuobing')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-cuobing"></div>
+    </div>
+    <div class="food-card" data-food="dandan" style="border-color:rgba(245,166,35,.2)">
+      <div class="food-emoji">🍔</div>
+      <div class="food-name">丹丹汉堡</div>
+      <div class="food-loc">南部限定</div>
+      <div class="food-desc">南部人的骄傲！推荐9号餐：炸鸡+面线羹的神仙组合，北部人吃不到的传奇速食。</div>
+      <div class="food-tag" style="background:rgba(245,166,35,.15);color:#f5a623">⭐ 9号餐必点</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('dandan')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-dandan"></div>
+    </div>
+    <div class="food-card" data-food="xiaopaofu">
+      <div class="food-emoji">🍩</div>
+      <div class="food-name">义美小泡芙</div>
+      <div class="food-loc">全台超市/便利店</div>
+      <div class="food-desc">台湾殿堂级国民零食！外皮酥脆内馅爆浆，每次去超商必扫货（巧克力/牛奶永远滴神）。</div>
+      <div class="food-tag" style="background:rgba(233,69,96,.1);color:#ff6b8a">超商必买</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('xiaopaofu')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-xiaopaofu"></div>
+    </div>
+    <div class="food-card" data-food="guaiguai">
+      <div class="food-emoji">🌽</div>
+      <div class="food-name">乖乖</div>
+      <div class="food-loc">全台超市/便利店</div>
+      <div class="food-desc">椰子味的膨化零食。在台湾，绿包乖乖必须供奉在机房让机器“乖乖”不当机！</div>
+      <div class="food-tag" style="background:rgba(16,185,129,.1);color:#10b981">过界护体神器</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('guaiguai')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-guaiguai"></div>
+    </div>
+    <div class="food-card" data-food="dadiaoshao" style="border-color:rgba(192,132,252,.2)">
+      <div class="food-emoji">🌭</div>
+      <div class="food-name">大雕烧</div>
+      <div class="food-loc">西门町/士林夜市</div>
+      <div class="food-desc">超猎奇的特大号造型鸡蛋糕与香肠！包着浓郁起司或德式香肠，街头恶搞必合照。</div>
+      <div class="food-tag" style="background:rgba(192,132,252,.1);color:#c084fc">猎奇搞怪</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('dadiaoshao')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-dadiaoshao"></div>
+    </div>
   </div>
 
   <!-- 自由打卡区 -->
@@ -702,6 +831,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
     <div id="food-custom-records-list" style="margin-top:16px; display:flex; flex-direction:column; gap:10px;"></div>
   </div>
 </div>
+</div><!-- end module-food -->
 
 <div class="home-footer">用 <span class="heart">&#10084;&#65039;</span> 制作的旅行计划<br>点击已规划的目的地查看详细攻略</div>
 </div>
@@ -3168,6 +3298,31 @@ function updateFoodStats() {
     if(el1) el1.textContent = totalCount;
     if(el2) el2.textContent = cities.size;
     if(el3) el3.textContent = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : '-';
+}
+
+// === 模块导航系统 ===
+function openModule(name) {
+    // 隐藏模块入口网格
+    document.getElementById('moduleGrid').style.display = 'none';
+    // 隐藏所有模块页面
+    document.querySelectorAll('.module-page').forEach(p => p.classList.remove('show'));
+    // 显示目标模块
+    const target = document.getElementById('module-' + name);
+    if(target) {
+        target.classList.add('show');
+        // 滚到顶部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+function closeModule() {
+    // 隐藏所有模块页面
+    document.querySelectorAll('.module-page').forEach(p => p.classList.remove('show'));
+    // 显示模块入口网格
+    document.getElementById('moduleGrid').style.display = '';
+    // 滚到模块网格位置
+    setTimeout(() => {
+        document.getElementById('moduleGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
