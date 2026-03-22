@@ -639,24 +639,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
       <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('niurou')">📸 打卡这道美食</div>
       <div class="food-records" id="food-records-niurou"></div>
     </div>
-    <div class="food-card" data-food="xiaolongbao">
-      <div class="food-emoji">🥟</div>
-      <div class="food-name">小笼包</div>
-      <div class="food-loc">台北鼎泰丰</div>
-      <div class="food-desc">薄皮紧裹鲜美汤汁，轻轻咬开一口爆浆！世界第一小笼包。</div>
-      <div class="food-tag">世界闻名</div>
-      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('xiaolongbao')">📸 打卡这道美食</div>
-      <div class="food-records" id="food-records-xiaolongbao"></div>
-    </div>
-    <div class="food-card" data-food="yuyuan">
-      <div class="food-emoji">🍡</div>
-      <div class="food-name">芋圆</div>
-      <div class="food-loc">九份老街</div>
-      <div class="food-desc">Q弹手工芋圆配红豆、花生，加冰或热食皆可，九份必吃甜品。</div>
-      <div class="food-tag">九份限定</div>
-      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('yuyuan')">📸 打卡这道美食</div>
-      <div class="food-records" id="food-records-yuyuan"></div>
-    </div>
     <div class="food-card" data-food="jipai">
       <div class="food-emoji">🍗</div>
       <div class="food-name">炸鸡排</div>
@@ -666,33 +648,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
       <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('jipai')">📸 打卡这道美食</div>
       <div class="food-records" id="food-records-jipai"></div>
     </div>
-    <div class="food-card" data-food="chouDoufu">
-      <div class="food-emoji">🫕</div>
-      <div class="food-name">臭豆腐</div>
-      <div class="food-loc">各大夜市</div>
-      <div class="food-desc">闻着臭吃着香！外酥里嫩，搭配台式泡菜解腻，挑战味蕾极限。</div>
-      <div class="food-tag">勇者必试</div>
-      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('chouDoufu')">📸 打卡这道美食</div>
-      <div class="food-records" id="food-records-chouDoufu"></div>
-    </div>
-    <div class="food-card" data-food="oyster">
-      <div class="food-emoji">🦪</div>
-      <div class="food-name">蚵仔煎</div>
-      <div class="food-loc">台南/夜市</div>
-      <div class="food-desc">新鲜蚵仔配鸡蛋与地瓜粉煎制，淋上甜辣酱，滑嫩鲜美。</div>
-      <div class="food-tag">经典小吃</div>
-      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('oyster')">📸 打卡这道美食</div>
-      <div class="food-records" id="food-records-oyster"></div>
-    </div>
-    <div class="food-card" data-food="mango">
-      <div class="food-emoji">🥭</div>
-      <div class="food-name">芒果冰</div>
-      <div class="food-loc">台南玉井</div>
-      <div class="food-desc">新鲜爱文芒果堆成山，绵绵冰入口即化，夏天的终极幸福。</div>
-      <div class="food-tag">夏季限定</div>
-      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('mango')">📸 打卡这道美食</div>
-      <div class="food-records" id="food-records-mango"></div>
-    </div>
     <div class="food-card" data-food="danbin">
       <div class="food-emoji">🥚</div>
       <div class="food-name">蛋饼</div>
@@ -701,6 +656,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
       <div class="food-tag">早餐必吃</div>
       <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('danbin')">📸 打卡这道美食</div>
       <div class="food-records" id="food-records-danbin"></div>
+    </div>
+    <div class="food-card" data-food="yutou" style="border-color:rgba(192,132,252,.15)">
+      <div class="food-emoji">🍰</div>
+      <div class="food-name">芋头蛋糕</div>
+      <div class="food-loc">台中必买伴手礼</div>
+      <div class="food-desc">绵密真芋头与松软蛋糕的完美结合，入口即化，浓郁芋香让人一吃上瘾。推荐先麦、阿默！</div>
+      <div class="food-tag" style="background:rgba(192,132,252,.1);color:#c084fc">⭐ 重点推荐</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('yutou')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-yutou"></div>
+    </div>
+    <div class="food-card" data-food="tianbula" style="border-color:rgba(245,166,35,.15)">
+      <div class="food-emoji">🍢</div>
+      <div class="food-name">甜不辣</div>
+      <div class="food-loc">全台夜市/小吃店</div>
+      <div class="food-desc">鱼浆制成的Q弹炸物，配上独门甜辣酱汁，是台湾街头最暖心的古早味小吃！</div>
+      <div class="food-tag" style="background:rgba(245,166,35,.1);color:#f5a623">⭐ 重点推荐</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('tianbula')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-tianbula"></div>
+    </div>
+    <div class="food-card" data-food="dachang">
+      <div class="food-emoji">🌭</div>
+      <div class="food-name">大肠包小肠</div>
+      <div class="food-loc">各大夜市</div>
+      <div class="food-desc">糯米肠对半切开夹入烤香肠，再加蒜片、酸菜、花生粉，一口咬下超满足！台湾夜市独创神物。</div>
+      <div class="food-tag" style="background:rgba(233,69,96,.1);color:#ff6b8a">⭐ 重点推荐</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('dachang')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-dachang"></div>
+    </div>
+    <div class="food-card" data-food="relu">
+      <div class="food-emoji">🍲</div>
+      <div class="food-name">台式热卤</div>
+      <div class="food-loc">全台小吃摊/夜市</div>
+      <div class="food-desc">百叶豆腐、鸭血、米血糕、贡丸…自选食材入锅卤煮，淋上独家卤汁，越卤越入味！</div>
+      <div class="food-tag" style="background:rgba(245,166,35,.1);color:#f5a623">⭐ 重点推荐</div>
+      <div class="food-add-btn" onclick="event.stopPropagation(); addFoodRecord('relu')">📸 打卡这道美食</div>
+      <div class="food-records" id="food-records-relu"></div>
     </div>
   </div>
 
