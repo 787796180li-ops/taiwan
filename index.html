@@ -30,6 +30,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 .badge-tea{color:#fbbf24;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.12)}
 .badge-food{color:#c084fc;border-color:rgba(192,132,252,.3);background:rgba(192,132,252,.12)}
 .badge-drink{color:#38bdf8;border-color:rgba(56,189,248,.3);background:rgba(56,189,248,.12)}
+.badge-marvel{color:#ed1d24;border-color:rgba(237,29,36,.3);background:rgba(237,29,36,.12)}
 /* Tabs */
 .tabs{display:flex;position:sticky;top:0;z-index:100;background:rgba(10,10,20,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);padding:0 8px}
 .tab{flex:1;padding:14px 0;text-align:center;font-size:13px;font-weight:700;cursor:pointer;position:relative;color:var(--sub);transition:.3s}
@@ -386,6 +387,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 .mc-tea::before{background:linear-gradient(135deg,#ff6b8a,#fbbf24)}
 .mc-drinks::before{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
 .mc-food::before{background:linear-gradient(135deg,#e94560,#c084fc)}
+.mc-marvel::before{background:linear-gradient(135deg,#ed1d24,#fccb00)}
+/* === 漫威宇宙专题 === */
+.marvel-container { padding: 0 4px; }
+.marvel-stats { background: var(--card); border-radius: 16px; padding: 16px; margin-bottom: 20px; border: 1px solid rgba(237, 29, 36, 0.2); box-shadow: 0 0 20px rgba(237, 29, 36, 0.1); }
+.marvel-progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.marvel-progress-title { font-size: 14px; font-weight: 800; color: #ed1d24; display: flex; align-items: center; gap: 6px; }
+.marvel-progress-val { font-size: 12px; color: var(--sub); }
+.marvel-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+.marvel-bar-fill { height: 100%; background: linear-gradient(90deg, #ed1d24, #fccb00); width: 0%; transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 10px rgba(237, 29, 36, 0.5); }
+.marvel-users { display: flex; gap: 12px; }
+.m-user { flex: 1; background: rgba(255,255,255,0.03); border-radius: 10px; padding: 8px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+.m-user-name { font-size: 11px; color: var(--sub); margin-bottom: 4px; }
+.m-user-pct { font-size: 16px; font-weight: 800; color: var(--text); }
+.m-user-pct span { font-size: 10px; font-weight: 400; opacity: 0.6; }
+
+.marvel-year-group { margin-bottom: 30px; }
+.marvel-year-title { font-size: 24px; font-weight: 900; color: #ed1d24; margin-bottom: 12px; padding: 0 10px; border-left: 4px solid #ed1d24; line-height: 1; }
+.m-card { background: var(--card); border-radius: 14px; padding: 14px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 8px; transition: .3s; position: relative; overflow: hidden; margin-top: 20px;}
+.m-card-top { display: flex; align-items: center; gap: 12px; width: 100%; }
+.m-card.watched-both { border-color: rgba(237, 29, 36, 0.3); background: rgba(132, 203, 238, 0.03); }
+.marvel-desc-area { margin-top: 8px; font-size: 11px; color: #bae6fd; line-height: 1.6; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 10px; border: 1px solid rgba(132, 203, 238, 0.1); width: 100%; display: block !important; }
+.m-record-box { margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.m-record-item { background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 10px; font-size: 11px; position: relative; }
+.m-record-user { font-weight: 800; margin-bottom: 2px; display: flex; justify-content: space-between; align-items: center; }
+.m-record-user .u-n { color: #84cbee; }
+.m-record-user .u-p { color: #ff6b8a; }
+.m-record-stars { color: #f59e0b; font-size: 10px; margin: 2px 0; }
+.m-record-date { color: var(--sub); font-size: 9px; font-weight: 400; }
+.m-record-note { color: var(--text); margin-top: 4px; line-height: 1.4; background: rgba(255,255,255,0.02); padding: 4px 6px; border-radius: 4px; }
+.m-del-record { position: absolute; top: 6px; right: 8px; color: #ed1d24; cursor: pointer; padding: 4px; font-size: 12px; font-weight: bold; opacity: 0.3; transition: .2s; }
+.m-del-record:hover { opacity: 1; }
+/* === 漫威评价弹窗 === */
+.m-modal { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; }
+.m-modal.show { display: flex; animation: fadeIn .3s ease; }
+.m-modal-content { background: var(--card); border: 1px solid rgba(237, 29, 36, 0.3); border-radius: 24px; padding: 24px; width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+.m-modal-title { font-size: 18px; font-weight: 800; color: #ed1d24; margin-bottom: 20px; text-align: center; }
+.m-modal-stars { display: flex; justify-content: center; gap: 12px; font-size: 32px; color: rgba(255,255,255,0.1); margin-bottom: 20px; cursor: pointer; }
+.m-modal-stars span { transition: .2s; }
+.m-modal-stars span.active { color: #f59e0b; text-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+.m-modal textarea { width: 100%; min-height: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; color: var(--text); font-size: 14px; margin-bottom: 20px; outline: none; transition: .2s; font-family: inherit; }
+.m-modal textarea:focus { border-color: #ed1d24; background: rgba(255,255,255,0.05); }
+.m-modal-btns { display: flex; gap: 12px; }
+.m-modal-btns button { flex: 1; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; transition: .2s; border: none; }
+.m-modal-close { background: rgba(255,255,255,0.05); color: var(--sub); }
+.m-modal-save { background: #ed1d24; color: #fff; box-shadow: 0 4px 15px rgba(237, 29, 36, 0.3); }
+.m-modal-btns button:active { transform: scale(0.96); }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.m-info { flex: 1; min-width: 0; }
+.m-title-row { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.m-type { font-size: 9px; padding: 1px 4px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--sub); flex-shrink: 0; }
+.m-title { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.m-meta { font-size: 10px; color: var(--sub); }
+.m-checks { display: flex; gap: 8px; flex-shrink: 0; }
+.m-check-btn { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: .2s; position: relative; font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.2); }
+.m-check-btn.on-user { border-color: #ed1d24; color: #ed1d24; background: rgba(237, 29, 36, 0.1); box-shadow: 0 0 8px rgba(237, 29, 36, 0.3); }
+.m-check-btn.on-partner { border-color: #fccb00; color: #fccb00; background: rgba(252, 203, 0, 0.1); box-shadow: 0 0 8px rgba(252, 203, 0, 0.3); }
+.m-check-btn::after { content: '✓'; position: absolute; opacity: 0; transform: scale(0.5); transition: .2s; }
+.m-check-btn.on::after { opacity: 1; transform: scale(1); }
+.m-check-label { position: absolute; bottom: -14px; font-size: 8px; color: var(--sub); white-space: nowrap; }
+
+.marvel-filter { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.marvel-filter::-webkit-scrollbar { display: none; }
+.m-filter-btn { padding: 6px 14px; border-radius: 20px; background: var(--glass); border: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: var(--sub); white-space: nowrap; cursor: pointer; }
+.m-filter-btn.active { background: #ed1d24; color: #fff; border-color: #ed1d24; }
+.m-desc-box { margin-top: 8px; font-size: 11px; color: var(--sub); line-height: 1.5; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 8px; display: none; }
+.m-card.expanded .m-desc-box { display: block; animation: slideIn .2s ease; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
 .module-page{display:none;position:relative;z-index:1;padding:0 20px 40px;max-width:800px;margin:0 auto}
 .module-page.show{display:block;animation:fadeIn .35s ease}
 .module-back-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:20px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;margin-bottom:16px}
@@ -410,6 +479,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
     <span class="badge badge-tea">🥤 7家奶茶</span>
     <span class="badge badge-food">🍜 14道美食</span>
     <span class="badge badge-drink">🍺 酒精日记</span>
+    <!-- <span class="badge badge-marvel">💥 漫威追剧</span> -->
   </div>
 </div>
 
@@ -439,7 +509,53 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
     <div class="mc-title">美食打卡</div>
     <div class="mc-desc">台湾经典美食清单<br>评分 + 一句话点评</div>
   </div>
+  <!-- 漫威模块暂时隐藏 -->
+  <!-- 
+  <div class="module-card mc-marvel" onclick="openModule('marvel')">
+    <span class="mc-badge" style="background:rgba(237,29,36,.15);color:#ed1d24">全集追剧</span>
+    <div class="mc-icon">💥</div>
+    <div class="mc-title">漫威宇宙</div>
+    <div class="mc-desc">全系列观影清单<br>星级评分 + 观后感</div>
+  </div>
+  -->
 </div>
+
+<!-- ====== 模块：漫威宇宙 ====== -->
+<div class="module-page" id="module-marvel">
+<button class="module-back-btn" onclick="closeModule()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>返回首页</button>
+<div class="marvel-container">
+  <div class="dest-section-title"><span class="dot" style="background:#ed1d24"></span>🎬 漫威宇宙观影计划</div>
+  
+  <!-- 统计栏 -->
+  <div class="marvel-stats">
+    <div class="marvel-progress-header">
+      <div class="marvel-progress-title">🏆 共同拯救世界进度</div>
+      <div class="marvel-progress-val" id="marvel-common-text">已看 0/93</div>
+    </div>
+    <div class="marvel-bar-bg"><div class="marvel-bar-fill" id="marvel-main-bar"></div></div>
+    <div class="marvel-users">
+      <div class="m-user">
+        <div class="m-user-name">李春波</div>
+        <div class="m-user-pct" id="marvel-user-p1">0<span>%</span></div>
+      </div>
+      <div class="m-user">
+        <div class="m-user-name">50</div>
+        <div class="m-user-pct" id="marvel-user-p2">0<span>%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 筛选 -->
+  <div class="marvel-filter">
+    <div class="m-filter-btn active" onclick="filterMarvel('all', this)">全部英雄</div>
+    <div class="m-filter-btn" onclick="filterMarvel('unwatched', this)">待看宇宙</div>
+    <div class="m-filter-btn" onclick="filterMarvel('watched', this)">已看瞬间</div>
+  </div>
+
+  <!-- 影单列表 (动态渲染) -->
+  <div id="marvel-timeline"></div>
+</div>
+</div><!-- end module-marvel -->
 
 <!-- ====== 模块：旅行目的地 ====== -->
 <div class="module-page" id="module-destinations">
@@ -574,8 +690,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
           </div>
         </div>
         <div class="dest-meta">
-          <span class="dest-tag dest-tag-days">5天</span>
-          <span class="dest-tag dest-tag-count">18景点</span>
+          <span class="dest-tag dest-tag-days">3天</span>
+          <span class="dest-tag dest-tag-count">10景点</span>
           <span class="dest-tag dest-tag-active">可查看</span>
         </div>
       </div>
@@ -841,7 +957,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 
 <div class="hero" style="position:relative">
 <button class="back-btn" onclick="backHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>返回</button>
-<h1>&#127982; 台北 · 5日深度游</h1>
+<h1>&#127982; 台北 · 3日深度游</h1>
 <p class="sub">台北市 & 新北市 ｜ 18个精选景点</p>
 <div class="badges"><span class="badge">&#128197; 5天行程</span><span class="badge">&#128205; 18景点</span><span class="badge">&#128506; 支持导航</span></div>
 </div>
@@ -851,17 +967,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <div class="tab" data-d="1" onclick="sw(1,this)">Day1</div>
 <div class="tab" data-d="2" onclick="sw(2,this)">Day2</div>
 <div class="tab" data-d="3" onclick="sw(3,this)">Day3</div>
-<div class="tab" data-d="4" onclick="sw(4,this)">Day4</div>
-<div class="tab" data-d="5" onclick="sw(5,this)">Day5</div>
-<div class="tab" data-d="6" onclick="sw(6,this)">&#128202;距离</div>
-<div class="tab" data-d="7" onclick="sw(7,this)">&#128506;地图</div>
+<div class="tab" data-d="4" onclick="sw(4,this)">&#128202;距离</div>
+<div class="tab" data-d="5" onclick="sw(5,this)">&#128506;地图</div>
 </div>
 
 <!-- 总览 -->
 <div class="page on" id="p0">
 <div class="ov-grid">
-<div class="ov-stat"><div class="ov-num">5天</div><div class="ov-label">行程天数</div></div>
-<div class="ov-stat"><div class="ov-num">18个</div><div class="ov-label">景点数量</div></div>
+<div class="ov-stat"><div class="ov-num">3天</div><div class="ov-label">行程天数</div></div>
+<div class="ov-stat"><div class="ov-num">10个</div><div class="ov-label">景点数量</div></div>
 <div class="ov-stat"><div class="ov-num">2城</div><div class="ov-label">台北＋新北</div></div>
 <div class="ov-stat"><div class="ov-num">深度</div><div class="ov-label">行程节奏</div></div>
 </div>
@@ -871,21 +985,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">野柳地质公园→九份老街→十分车站天灯</span></div>
 <div class="ov-row"><span class="oname"><b>Day2</b> 北区文化线</span><span class="otag" style="background:rgba(91,155,213,.15);color:#5b9bd5">4景点</span></div>
 <div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">故宫博物院→忠烈祠→大稻埕/迪化街→宁夏夜市</span></div>
-<div class="ov-row"><span class="oname"><b>Day3</b> 汤泉与山山线</span><span class="otag" style="background:rgba(45,212,191,.15);color:#2dd4bf">4景点</span></div>
-<div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">北投图书馆→地热谷→阳明山深度游→士林夜市</span></div>
-<div class="ov-row"><span class="oname"><b>Day4</b> 人文艺术线</span><span class="otag" style="background:rgba(192,132,252,.15);color:#c084fc">5景点</span></div>
-<div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">中正纪念堂→华山文创→台大→宝藏岩→西门町</span></div>
-<div class="ov-row"><span class="oname"><b>Day5</b> 流行与地标线</span><span class="otag" style="background:rgba(245,158,11,.15);color:#f59e0b">3景点</span></div>
-<div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">政治大学→松山文创→信义区/象山夜景</span></div>
+<div class="ov-row"><span class="oname"><b>Day3</b> 人文与地标线</span><span class="otag" style="background:rgba(192,132,252,.15);color:#c084fc">4核心区</span></div>
+<div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">中正纪念堂→台大→信义商圈→象山夜景极目</span></div>
 </div>
 <div class="tips">
 <h4>&#128161; 行程设计思路</h4>
 <ul>
 <li><b>Day1</b> 新北一日：经典外郊游，野柳→九份→十分</li>
 <li><b>Day2</b> 历史深度：故宫文化洗礼后前往老台北大稻埕</li>
-<li><b>Day3</b> 自然康养：上午温泉区漫步，下午阳明山深度游</li>
-<li><b>Day4</b> 校园与创意：中轴线人文经典与西门町闹区</li>
-<li><b>Day5</b> 青春与繁华：追寻青峰足迹后前往东区繁华中心</li>
+<li><b>Day3</b> 人文与繁华缩影：上午中轴线打卡漫步校园，下午起赴信义区购物与登象山看夜景</li>
 </ul>
 </div>
 </div>
@@ -991,45 +1099,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <!-- Day 3 -->
 <div class="page" id="p3">
 <div class="day-card">
-<div class="day-banner db3" style="background:linear-gradient(135deg,rgba(45,212,191,.1),rgba(20,184,166,.05));border-bottom-color:rgba(45,212,191,.2)"><h2>Day 3 · 汤泉与山山</h2><div class="route">北投图书馆 → 地热谷 → 阳明山 → 士林夜市</div></div>
-<div class="spots">
-<div class="spot-item">
-<div class="spot-time">09:30<br>~<br>11:30</div>
-<div class="spot-info">
-<div class="spot-name">📚 北投图书馆 & 温泉区</div>
-<div class="spot-desc">全球最美图书馆。周边地热谷常年雾气缭绕，非常有仙境感。</div>
-<div class="spot-tags"><span class="st st-o">上午</span><span class="st st-b">约2h</span><span class="st st-g">免费</span></div>
-<button class="nav-btn" onclick="openNav('北投图书馆','121.5069','25.1364')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
-</div>
-</div>
-<div class="transit-row">↓ <span>公交约40分钟上山</span></div>
-<div class="spot-item">
-<div class="spot-time">13:00<br>~<br>16:30</div>
-<div class="spot-info">
-<div class="spot-name">🏔 阳明山深度游</div>
-<div class="spot-desc">擎天岗大草原、小油坑喷气口。空气清新，景色壮丽。可以找个山间餐厅吃野菜。</div>
-<div class="spot-tags"><span class="st st-o">自然</span><span class="st st-b">约3.5h</span><span class="st st-r">需走路</span></div>
-<button class="nav-btn" onclick="openNav('阳明山国家公园','121.5601','25.1685')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
-</div>
-</div>
-<div class="transit-row">↓ <span>公交+捷运约1小时下山</span></div>
-<div class="spot-item" style="border-left-color: #c084fc;">
-<div class="spot-time">18:00<br>~<br>21:00</div>
-<div class="spot-info">
-<div class="spot-name">🍢 士林夜市</div>
-<div class="spot-desc">台北最大夜市。豪大大鸡排、大饼包小饼。下山直接到剑潭站，非常顺路。</div>
-<div class="spot-tags"><span class="st" style="background:rgba(192,132,252,.15);color:#c084fc">经典夜市</span><span class="st st-b">约3h</span></div>
-<button class="nav-btn" onclick="openNav('士林夜市','121.5244','25.0882')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
-</div>
-</div>
-</div></div>
-<div class="tips"><h4>💡 Day3 Tips</h4><ul><li>阳明山上比市区气温低，请备好外套</li><li>往返阳明山的108游园公车建议购买一日票</li><li>士林夜市推荐剑潭站1号出口出站即达</li></ul></div>
-</div>
-
-<!-- Day 4 -->
-<div class="page" id="p4">
-<div class="day-card">
-<div class="day-banner db4" style="background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(124,58,237,.05));border-bottom-color:rgba(192,132,252,.2)"><h2>Day 4 · 人文艺术线</h2><div class="route">中正纪念堂 → 华山文创 → 台大 → 宝藏岩 → 西门町</div></div>
+<div class="day-banner db4" style="background:linear-gradient(135deg,rgba(192,132,252,.1),rgba(124,58,237,.05));border-bottom-color:rgba(192,132,252,.2)"><h2>Day 3 · 人文与地标线</h2><div class="route">中正纪念堂 → 台大/公馆 → 信义商圈 → 象山夜景</div></div>
 <div class="spots">
 <div class="spot-item">
 <div class="spot-time">09:00<br>~<br>11:00</div>
@@ -1040,19 +1110,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <button class="nav-btn" onclick="openNav('中正纪念堂','121.5220','25.0350')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
 </div>
 </div>
-<div class="transit-row">↓ <span>捷运10分钟</span></div>
-<div class="spot-item">
-<div class="spot-time">11:30<br>~<br>13:30</div>
-<div class="spot-info">
-<div class="spot-name">🎨 华山1914文创园区</div>
-<div class="spot-desc">老厂房改造，适合淘文创好物、看展览和拍文艺照。</div>
-<div class="spot-tags"><span class="st st-o">文创</span><span class="st st-b">约2h</span><span class="st st-g">免费入园</span></div>
-<button class="nav-btn" onclick="openNav('华山1914文创园区','121.5295','25.0445')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
-</div>
-</div>
 <div class="transit-row">↓ <span>捷运/单车约20分钟</span></div>
 <div class="spot-item">
-<div class="spot-time">14:00<br>~<br>16:00</div>
+<div class="spot-time">11:30<br>~<br>14:30</div>
 <div class="spot-info">
 <div class="spot-name">🎓 国立台湾大学 & 宝藏岩</div>
 <div class="spot-desc">椰林大道、傅钟。旁边的宝藏岩是依山而建的小众艺术村。</div>
@@ -1060,60 +1120,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <button class="nav-btn" onclick="openNav('国立台湾大学','121.5405','25.0174')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
 </div>
 </div>
-<div class="transit-row">↓ <span>捷运约15分钟</span></div>
-<div class="spot-item">
-<div class="spot-time">17:00<br>~<br>21:00</div>
-<div class="spot-info">
-<div class="spot-name">🛍 西门町</div>
-<div class="spot-desc">台北版的涩谷。年轻人的聚集地，阿宗面线、老天禄卤味推荐。</div>
-<div class="spot-tags"><span class="st st-p">购物/夜色</span><span class="st st-b">约4h</span></div>
-<button class="nav-btn" onclick="openNav('西门町','121.5081','25.0422')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
-</div>
-</div>
-</div></div>
-<div class="tips"><h4>💡 Day4 Tips</h4><ul><li>中正纪念堂上午去光线较好，正门拍照气派</li><li>西门町建议晚餐就在这里吃，选择超级丰富</li></ul></div>
-</div>
-
-<!-- Day 5 -->
-<div class="page" id="p5">
-<div class="day-card">
-<div class="day-banner db5" style="background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(217,119,6,.05));border-bottom-color:rgba(245,158,11,.2)"><h2>Day 5 · 流行与地标线</h2><div class="route">国立政治大学 → 松山文创园区 → 信义区/象山夜景</div></div>
-<div class="spots">
-<div class="spot-item">
-<div class="spot-time">09:30<br>~<br>11:30</div>
-<div class="spot-info">
-<div class="spot-name">🎓 国立政治大学</div>
-<div class="spot-desc">吴青峰母校！山城校园非常美。醉梦溪畔漫步极具诗意。</div>
-<div class="spot-tags"><span class="st st-o">青峰母校</span><span class="st st-b">约2h</span><span class="st st-g">免费</span></div>
-<button class="nav-btn" onclick="openNav('国立政治大学','121.5767','24.9873')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
-</div>
-</div>
-<div class="transit-row">↓ <span>捷运约40分钟</span></div>
-<div class="spot-item">
-<div class="spot-time">12:30<br>~<br>15:00</div>
-<div class="spot-info">
-<div class="spot-name">🏭 松山文创园区</div>
-<div class="spot-desc">老烟厂改建。旁边的诚品松烟店是文青圣地。可以俯瞰正在兴建的大巨蛋。</div>
-<div class="spot-tags"><span class="st st-o">下午</span><span class="st st-b">约2.5h</span><span class="st st-g">文创中心</span></div>
-<button class="nav-btn" onclick="openNav('松山文创园区','121.5600','25.0439')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
-</div>
-</div>
-<div class="transit-row">↓ <span>捷运/步行约15分钟</span></div>
+<div class="transit-row">↓ <span>捷运约20分钟</span></div>
 <div class="spot-item" style="border-left-color: #5b9bd5;">
-<div class="spot-time">17:00<br>~<br>20:00</div>
+<div class="spot-time">15:00<br>~<br>20:00</div>
 <div class="spot-info">
-<div class="spot-name">🏙 信义区 & 象山夜景</div>
-<div class="spot-desc">台北最繁华区域。先在101周边感受国际都会感，然后在日落前爬象山看最美101夜景。</div>
-<div class="spot-tags"><span class="st" style="background:rgba(91,155,213,.15);color:#5b9bd5">101夜景</span><span class="st st-b">约3h</span></div>
+<div class="spot-name">🏙 信义区商圈 & 象山夜景</div>
+<div class="spot-desc">下午抵达台北最繁华区域（101周边、微风南山）逛街漫步。日落前（约17:00）去爬象山看最美101夜色。</div>
+<div class="spot-tags"><span class="st" style="background:rgba(91,155,213,.15);color:#5b9bd5">101夜景</span><span class="st st-b">最后半日逛吃</span></div>
 <button class="nav-btn" onclick="openNav('象山夜景观景台','121.5736','25.0275')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
 </div>
 </div>
 </div></div>
-<div class="tips"><h4>💡 Day 5 Tips</h4><ul><li>象山步道约需步行20分钟，请穿着舒适鞋子</li><li>政大到松山文旅可搭乘捷运文湖线转板南线</li></ul></div>
+<div class="tips"><h4>💡 Day3 Tips</h4><ul><li>中正纪念堂上午去光线较好，正门拍照气派</li><li>公馆商圈吃完午餐后前往信义区，象山步道台阶较陡需15-20分钟，请穿舒适防滑鞋</li></ul></div>
 </div>
 
 <!-- 距离分析 -->
-<div class="page" id="p6">
+<div class="page" id="p4">
 
 <div class="ana-section">
 <div class="ana-section-title"><span class="dot" style="background:#fbbf24"></span>&#128202; 行程距离合理性分析</div>
@@ -1135,22 +1157,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <span class="seval">&#9989;</span>
 </div>
 <div class="ana-summary-row">
-<span class="sday" style="color:#2dd4bf">Day3</span>
-<div class="sbar-wrap"><div class="sbar" style="width:40%;background:linear-gradient(90deg,#0d9488,#2dd4bf)"></div></div>
-<span class="skm">~23km</span>
-<span class="seval">&#9989;</span>
-</div>
-<div class="ana-summary-row">
-<span class="sday" style="color:#c084fc">Day4</span>
-<div class="sbar-wrap"><div class="sbar" style="width:20%;background:linear-gradient(90deg,#7c3aed,#c084fc)"></div></div>
-<span class="skm">~11km</span>
+<span class="sday" style="color:#c084fc">Day3</span>
+<div class="sbar-wrap"><div class="sbar" style="width:35%;background:linear-gradient(90deg,#7c3aed,#c084fc)"></div></div>
+<span class="skm">~19km</span>
 <span class="seval">&#127775;</span>
-</div>
-<div class="ana-summary-row">
-<span class="sday" style="color:#f59e0b">Day5</span>
-<div class="sbar-wrap"><div class="sbar" style="width:30%;background:linear-gradient(90deg,#d97706,#f59e0b)"></div></div>
-<span class="skm">~17km</span>
-<span class="seval">&#9989;</span>
 </div>
 </div>
 
@@ -1196,41 +1206,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 
 <!-- Day3 分析 -->
 <div class="ana-day-card">
-<div class="ana-day-header" style="background:rgba(45,212,191,.06)">
-<h3 style="color:#2dd4bf">&#128994; Day3 · 汤泉与山山</h3>
-<span class="ana-badge" style="background:rgba(46,204,113,.12);color:#2ecc71">✅ 合理</span>
-</div>
-<div class="ana-leg">
-<div class="ana-leg-top"><span class="ana-route">北投 → 阳明山</span><span class="ana-eval ok">✅ 合理</span></div>
-<div class="ana-leg-tags"><span class="ana-dist">~6.5km</span><span class="ana-mode">🚌 公交上山</span><span class="ana-time">40分</span></div>
-</div>
-<div class="ana-leg">
-<div class="ana-leg-top"><span class="ana-route">阳明山 → 士林</span><span class="ana-eval ok">✅ 合理</span></div>
-<div class="ana-leg-tags"><span class="ana-dist">~9km</span><span class="ana-mode">🚌 公交下山</span><span class="ana-time">40分</span></div>
-</div>
-</div>
-
-<!-- Day4 分析 -->
-<div class="ana-day-card">
 <div class="ana-day-header" style="background:rgba(192,132,252,.06)">
-<h3 style="color:#c084fc">&#128995; Day4 · 人文艺术</h3>
+<h3 style="color:#c084fc">&#128995; Day3 · 人文与地标</h3>
 <span class="ana-badge" style="background:rgba(45,212,191,.12);color:#2dd4bf">&#127775; 极佳</span>
 </div>
 <div class="ana-leg">
-<div class="ana-leg-top"><span class="ana-route">华山 → 台大</span><span class="ana-eval ok">✅</span></div>
+<div class="ana-leg-top"><span class="ana-route">中正纪念堂 → 台大</span><span class="ana-eval ok">✅</span></div>
 <div class="ana-leg-tags"><span class="ana-dist">~3.5km</span><span class="ana-mode">🚇 捷运</span><span class="ana-time">20分</span></div>
 </div>
-</div>
-
-<!-- Day5 分析 -->
-<div class="ana-day-card">
-<div class="ana-day-header" style="background:rgba(245,158,11,.06)">
-<h3 style="color:#f59e0b">&#128304; Day5 · 流行地标</h3>
-<span class="ana-badge" style="background:rgba(46,204,113,.12);color:#2ecc71">✅ 合理</span>
-</div>
 <div class="ana-leg">
-<div class="ana-leg-top"><span class="ana-route">松山文创 → 象山</span><span class="ana-eval ok">✅</span></div>
-<div class="ana-leg-tags"><span class="ana-dist">~2.5km</span><span class="ana-mode">🚇/🚶 捷运/步行</span><span class="ana-time">20分</span></div>
+<div class="ana-leg-top"><span class="ana-route">公馆 → 信义商圈</span><span class="ana-eval ok">✅</span></div>
+<div class="ana-leg-tags"><span class="ana-dist">~5.5km</span><span class="ana-mode">🚇 捷运</span><span class="ana-time">22分</span></div>
 </div>
 </div>
 
@@ -1258,7 +1244,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 </div>
 
 <!-- 地图页 -->
-<div class="page" id="p7">
+<div class="page" id="p5">
 <div style="background:var(--card);border-radius:var(--r);overflow:hidden;margin-bottom:16px">
 <div style="padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
 <h3 style="font-size:16px;font-weight:800">&#128506; 行程地图 · 住宿距离分析</h3>
@@ -1271,7 +1257,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <div style="background:var(--card);border-radius:var(--r);padding:14px 16px;margin-bottom:16px">
 <h4 style="font-size:13px;color:var(--gold);margin-bottom:10px">&#128204; 图例说明</h4>
 <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--sub)">
-<span>&#128308; Day1</span><span>&#128309; Day2</span><span>&#128994; Day3</span><span>&#128995; Day4</span><span>&#128304; Day5</span><span>&#127976; 推荐住宿</span>
+<span>&#128308; Day1</span><span>&#128309; Day2</span><span>&#128995; Day3</span><span>&#127976; 推荐住宿</span>
 </div>
 </div>
 
@@ -1285,8 +1271,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 </div>
 
 <div class="ana-leg">
-<div class="ana-leg-top"><span class="ana-route">第4/5晚 推荐住：<b style="color:var(--text)">台北车站</b>区域</span><span class="ana-eval best">&#127775;</span></div>
-<div class="ana-leg-tags"><span class="ana-dist">~40km</span><span class="ana-mode">直通机场捷运</span><span class="ana-time">35分到机场</span></div>
+<div class="ana-leg-top"><span class="ana-route">最后1晚 推荐住：<b style="color:var(--text)">台北车站</b>区域</span><span class="ana-eval best">&#127775;</span></div>
+<div class="ana-leg-tags"><span class="ana-dist">~40km</span><span class="ana-mode">直通机场捷运</span><span class="ana-time">35分前去机场</span></div>
 </div>
 </div>
 
@@ -1342,14 +1328,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 </div>
 <div class="ov-grid">
 <div class="ov-stat"><div class="ov-num">2天</div><div class="ov-label">行程天数</div></div>
-<div class="ov-stat"><div class="ov-num">9个</div><div class="ov-label">景点数量</div></div>
+<div class="ov-stat"><div class="ov-num">10个</div><div class="ov-label">景点数量</div></div>
 <div class="ov-stat"><div class="ov-num">台中</div><div class="ov-label">＋日月潭</div></div>
 <div class="ov-stat"><div class="ov-num">轻松</div><div class="ov-label">行程节奏</div></div>
 </div>
 <div class="ov-list">
 <h3>&#128203; 每日行程速览</h3>
-<div class="ov-row"><span class="oname"><b>Day1</b> 城市文艺线</span><span class="otag" style="background:rgba(245,158,11,.15);color:#f59e0b">6景点</span></div>
-<div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">宫原眼科→春水堂→国美馆→审计新村→高美湿地→逢甲夜市</span></div>
+<div class="ov-row"><span class="oname"><b>Day1</b> 城市文艺线</span><span class="otag" style="background:rgba(245,158,11,.15);color:#f59e0b">7景点</span></div>
+<div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">宫原眼科→春水堂→国美馆→审计新村→东海大学→高美湿地→逢甲夜市</span></div>
 <div class="ov-row"><span class="oname"><b>Day2</b> 日月潭专线</span><span class="otag" style="background:rgba(14,165,233,.15);color:#0ea5e9">4景点</span></div>
 <div class="ov-row"><span class="oname" style="font-size:11px;color:var(--sub)">台中出发→水社码头→玄光寺→伊达邵(可搭缆车)→返回台中</span></div>
 </div>
@@ -1361,12 +1347,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <li>恶作剧之吻取景地散落台中各处，边走边寻找💕</li>
 </ul>
 </div>
+<div class="tips" style="margin-top:16px;border-left-color:#10b981;background:rgba(16,185,129,0.06)">
+<h4 style="color:#10b981">&#127975; 落地提现免手续费 ATM 指南</h4>
+<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:6px;line-height:1.6">
+既然首站落地台中，建议优先寻找以下银行的 ATM，目前对境外发行 Visa 卡（如 Travel Wallet）免收本地提款手续费：<br>
+<b style="color:var(--text)">1. 国泰世华银行</b>：最推荐！在全台绝大多数的<b>全家便利店 (FamilyMart)</b> 以及捷运站内都能找到。<br>
+<b style="color:var(--text)">2. 兆丰银行</b>：在机场等各类交通枢纽和市区街道很常见。<br>
+<b style="color:var(--text)">3. 台北富邦银行</b> 和 <b style="color:var(--text)">台湾银行</b>：同样免收本地取款手续费。
+</div>
+</div>
+<div class="tips" style="margin-top:16px;border-left-color:#f59e0b;background:rgba(245,158,11,0.06)">
+<h4 style="color:#f59e0b">&#128241; KLOOK 电话卡台中机场取卡实录</h4>
+<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:6px;line-height:1.6">
+<b style="color:var(--text)">晚班机拿卡实况：</b>21:05 降落，21:50 即可到柜台。不用担心关门，<b>夜间店员会等最后一班飞机到达后再收工</b>！<br>
+<b style="color:var(--text)">📍 位置：</b>到达出闸后，<b>立刻走左边通道</b>，步行 10-20秒左右 就能在左侧看到全机场唯一的电信店。<br>
+<b style="color:var(--text)">📝 准备事项：</b>请准备好 <span class="st st-o">护照</span>、<span class="st st-o">入台证</span> 和 <span class="st st-o">带“台中机场”字样的兑换码截图</span> 快速排队。<br>
+<b style="color:var(--text)">💡 体验总结：</b>KLOOK订的 4G 定额电话费不限量卡，实测<b>网速极快且支持开热点共享给同伴</b>，绝对够用！
+</div>
+</div>
 </div>
 
 <!-- Day 1 -->
 <div class="tc-page" id="tcp1">
 <div class="day-card">
-<div class="day-banner tc-db1"><h2>Day 1 · 城市文艺线</h2><div class="route">🛬 抵达台中 → 宫原眼科 → 春水堂 → 国美馆 → 审计新村 → 高美湿地 → 逢甲夜市</div></div>
+<div class="day-banner tc-db1"><h2>Day 1 · 城市文艺线</h2><div class="route">🛬 抵达台中 → 宫原眼科 → 春水堂 → 国美馆 → 审计新村 → 东海大学 → 高美湿地 → 逢甲夜市</div></div>
 <div class="spots">
 
 <div class="spot-item">
@@ -1403,10 +1407,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 </div>
 </div>
 
-<div class="transit-row">↓ <span>公交/出租约40分钟</span>（约25km，强烈建议打车前往以赶上日落）</div>
+<div class="transit-row">↓ <span>公交/出租约20分钟</span></div>
 
 <div class="spot-item">
-<div class="spot-time">17:00<br>~<br>18:30</div>
+<div class="spot-time">16:35<br>~<br>17:15</div>
+<div class="spot-info">
+<div class="spot-name">🏛 东海大学 (路思义教堂)</div>
+<div class="spot-desc">台湾最美大学之一，由贝聿铭设计的路思义教堂是地标。校园广阔，绿意盎然，还可品尝东海乳品小栈的鲜奶。</div>
+<div class="spot-tags"><span class="st st-o">校园</span><span class="st st-b">约40分</span><span class="st st-g">打卡圣地</span></div>
+<button class="nav-btn" onclick="openNav('东海大学','120.6056','24.1802')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>导航前往</button>
+</div>
+</div>
+
+<div class="transit-row">↓ <span>公交/出租约30分钟</span>（强烈建议打车前往高美湿地以赶上日落）</div>
+
+<div class="spot-item">
+<div class="spot-time">17:45<br>~<br>19:00</div>
 <div class="spot-info">
 <div class="spot-name">🌅 高美湿地</div>
 <div class="spot-desc">看夕阳的绝美圣地！湿地栈道延伸入海，海风+落日超浪漫。<b>一定要晴天去！</b>建议日落前1小时到达，退潮时可赤脚踩水。</div>
@@ -1418,7 +1434,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC'
 <div class="transit-row">↓ <span>公交/出租约40分钟，返回市区</span></div>
 
 <div class="spot-item">
-<div class="spot-time">19:30<br>~<br>22:00</div>
+<div class="spot-time">19:40<br>~<br>22:00</div>
 <div class="spot-info">
 <div class="spot-name">🌙 逢甲夜市</div>
 <div class="spot-desc">台中最大最人气夜市！必吃：官芝霖大肠包小肠、明伦蛋饼、日船章鱼小丸子。推荐：<b>八曜和茶 · 牧场307（茶乳）</b>。</div>
@@ -2625,8 +2641,9 @@ function initTcMap(){
       {n:'宫原眼科',lat:24.1378,lng:120.6833,t:'13:00-14:00'},
       {n:'春水堂创始店',lat:24.1521,lng:120.6547,t:'14:15-15:00'},
       {n:'国美馆/审计新村',lat:24.1468,lng:120.6616,t:'15:15-16:15'},
-      {n:'高美湿地',lat:24.3126,lng:120.5503,t:'17:00-18:30'},
-      {n:'逢甲夜市',lat:24.1784,lng:120.6455,t:'19:30-22:00'}
+      {n:'东海大学',lat:24.1802,lng:120.6056,t:'16:35-17:15'},
+      {n:'高美湿地',lat:24.3126,lng:120.5503,t:'17:45-19:00'},
+      {n:'逢甲夜市',lat:24.1784,lng:120.6455,t:'19:40-22:00'}
     ]},
     {color:'#0ea5e9',label:'Day2',spots:[
       {n:'台中干城站(出发)',lat:24.1402,lng:120.6865,t:'08:30-10:00'},
@@ -2872,7 +2889,7 @@ var mapInited=false;
 var origSw=sw;
 sw=function(i,el){
 origSw(i,el);
-if(i===7&&!mapInited){mapInited=true;initMap()}
+if(i===5&&!mapInited){mapInited=true;initMap()}
 };
 
 function initMap(){
@@ -2895,22 +2912,10 @@ var days=[
 {n:'迪化街',lat:25.0560,lng:121.5100,t:'14:00-17:00'},
 {n:'宁夏夜市',lat:25.0560,lng:121.5150,t:'18:00-20:00'}
 ]},
-{color:'#2dd4bf',label:'Day3',spots:[
-{n:'北投图书馆',lat:25.1364,lng:121.5069,t:'09:30-11:30'},
-{n:'地热谷',lat:25.1382,lng:121.5113,t:'11:30-12:00'},
-{n:'阳明山',lat:25.1685,lng:121.5601,t:'13:00-16:30'},
-{n:'士林夜市',lat:25.0882,lng:121.5244,t:'18:00-21:00'}
-]},
-{color:'#c084fc',label:'Day4',spots:[
+{color:'#c084fc',label:'Day3',spots:[
 {n:'中正纪念堂',lat:25.0350,lng:121.5220,t:'09:00-11:00'},
-{n:'华山文创',lat:25.0445,lng:121.5295,t:'11:30-13:30'},
-{n:'台大/宝藏岩',lat:25.0174,lng:121.5405,t:'14:00-16:00'},
-{n:'西门町',lat:25.0422,lng:121.5081,t:'17:00-21:00'}
-]},
-{color:'#f59e0b',label:'Day5',spots:[
-{n:'政大',lat:24.9873,lng:121.5767,t:'09:30-11:30'},
-{n:'松山文创',lat:25.0439,lng:121.5600,t:'12:30-15:00'},
-{n:'象山/信义',lat:25.0275,lng:121.5736,t:'17:00-20:00'}
+{n:'台大/宝藏岩',lat:25.0174,lng:121.5405,t:'11:30-14:30'},
+{n:'信义商圈/象山夜景',lat:25.0275,lng:121.5736,t:'15:00-20:00'}
 ]}
 ];
 
@@ -2961,9 +2966,7 @@ amk.bindPopup('<div style="font-size:14px;font-weight:800;color:#111">&#9992;&#6
 // 住宿→次日首站 虚线
 var dashes=[
 {from:hotelCenter,to:[25.1024,121.5485],label:'~12km 到故宫 (Day 2)',color:'#5b9bd5'},
-{from:hotelCenter,to:[25.1364,121.5069],label:'~14km 到北投 (Day 3)',color:'#2dd4bf'},
-{from:hotelCenter,to:[25.0350,121.5220],label:'~1.5km 到中正纪念堂 (Day 4)',color:'#c084fc'},
-{from:hotelCenter,to:[24.9873,121.5767],label:'~8km 到政大 (Day 5)',color:'#f59e0b'},
+{from:hotelCenter,to:[25.0350,121.5220],label:'~1.5km 到中正纪念堂 (Day 3)',color:'#c084fc'},
 {from:hotelCenter,to:[airport.lat,airport.lng],label:'~40km 到桃园机场',color:'#f5a623'}
 ];
 dashes.forEach(function(d){
@@ -2977,7 +2980,24 @@ L.circle(hotelCenter,{radius:600,color:'#f5a623',fillColor:'#f5a623',fillOpacity
 setTimeout(function(){map.invalidateSize()},200);
 }
 </script>
-<!-- 图片放大遮罩 -->
+<!-- 漫威评价弹窗 -->
+<div id="marvel-modal" class="m-modal">
+  <div class="m-modal-content">
+    <div class="m-modal-title" id="m-modal-title">影片评价</div>
+    <div class="m-modal-stars">
+      <span onclick="setMStar(1)">★</span>
+      <span onclick="setMStar(2)">★</span>
+      <span onclick="setMStar(3)">★</span>
+      <span onclick="setMStar(4)">★</span>
+      <span onclick="setMStar(5)">★</span>
+    </div>
+    <textarea id="m-modal-note" placeholder="写下你的观影心情..."></textarea>
+    <div class="m-modal-btns">
+      <button class="m-modal-close" onclick="closeMModal()">取消</button>
+      <button class="m-modal-save" onclick="saveMRecord()">保存记录</button>
+    </div>
+  </div>
+</div>
 <div class="img-modal" id="imgModal" onclick="this.classList.remove('show')">
   <img id="modalImg" src="" alt="大图预览">
 </div>
@@ -3300,26 +3320,286 @@ function updateFoodStats() {
     if(el3) el3.textContent = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : '-';
 }
 
+// === 漫威宇宙观影追踪逻辑 ===
+const marvelData = [
+    { year: '2008', items: [
+        { id: 'm1', t: '钢铁侠', c: '电影', d: '2008-05-02', desc: '托尼·斯塔克遭绑架后自制战甲成钢铁侠' },
+        { id: 'm2', t: '无敌浩克', c: '电影', d: '2008-06-13', desc: '班纳因伽马射线辐射变绿巨人躲避追捕' }
+    ]},
+    { year: '2010', items: [
+        { id: 'm3', t: '钢铁侠 2', c: '电影', d: '2010-05-07', desc: '托尼公开身份后遭新敌威胁并钯中毒' }
+    ]},
+    { year: '2011', items: [
+        { id: 'm4', t: '雷神', c: '电影', d: '2011-05-06', desc: '雷神被贬地球学会谦逊对抗弟弟洛基' },
+        { id: 'm5', t: '美国队长：复仇者先锋', c: '电影', d: '2011-07-22', desc: '二战士兵罗杰斯注射血清成美国队长' },
+        { id: 'm6', t: '神盾顾问', c: '短片', d: '2011-09-13', desc: '神盾局处理浩克事件幕后故事' },
+        { id: 'm7', t: '寻找雷神锤子路上发生的趣事', c: '短片', d: '2011-10-25', desc: '神盾局特工搞搞笑寻锤' }
+    ]},
+    { year: '2012', items: [
+        { id: 'm8', t: '复仇者联盟', c: '电影', d: '2012-05-04', desc: '六巨头组队击退洛基拯救纽约' },
+        { id: 'm9', t: '47号物品', c: '短片', d: '2012-09-25', desc: '普通人捡到复联大战外星武器' }
+    ]},
+    { year: '2013', items: [
+        { id: 'm10', t: '钢铁侠 3', c: '电影', d: '2013-05-03', desc: '托尼遭满大人袭击绝境中自我救赎' },
+        { id: 'm11', t: '探员卡特', c: '短片', d: '2013-09-03', desc: '佩姬·卡特早期任务' },
+        { id: 'm13', t: '雷神 2：黑暗世界', c: '电影', d: '2013-11-08', desc: '雷神联合洛基对抗黑暗精灵' }
+    ]},
+    { year: '2014', items: [
+        { id: 'm14', t: '美国队长 2：冬日战士', c: '电影', d: '2014-04-04', desc: '神盾局阴谋揭露美队与冬兵对决' },
+        { id: 'm15', t: '漫威影业：宇宙集结', c: '纪录', d: '2014-03-18', desc: '漫威宇宙幕后解析' },
+        { id: 'm16', t: '银河护卫队', c: '电影', d: '2014-08-01', desc: '星爵组队阻止力量宝石滥用' },
+        { id: 'm18', t: '漫威 75 年：从俚俗到全球', c: '纪录', d: '2014-11-04', desc: '漫威 75 年历史回顾' }
+    ]},
+    { year: '2015', items: [
+        { id: 'm20', t: '复仇者联盟 2：奥创纪元', c: '电影', d: '2015-05-01', desc: '奥创妄图灭世绯红女巫幻视加入' },
+        { id: 'm21', t: 'WHIH 新闻前线', c: '短片', d: '2015-05-12', desc: '虚构新闻穿插复联 2 与蚁人剧情' },
+        { id: 'm22', t: '蚁人', c: '电影', d: '2015-07-17', desc: '汉克皮姆传授蚁人战衣对抗科技反派' }
+    ]},
+    { year: '2016', items: [
+        { id: 'm28', t: '美国队长 3：内战', c: '电影', d: '2016-05-06', desc: '复联因索科维亚协议分裂成两派' },
+        { id: 'm31', t: '奇异博士', c: '电影', d: '2016-11-04', desc: '外科医生斯特兰奇学魔法守护地球' }
+    ]},
+    { year: '2017', items: [
+        { id: 'm33', t: '银河护卫队 2', c: '电影', d: '2017-05-05', desc: '星爵寻父勇度牺牲救赎团队' },
+        { id: 'm34', t: '蜘蛛侠：英雄归来', c: '电影', d: '2017-07-07', desc: '高中生蜘蛛侠平衡校园与英雄身份' },
+        { id: 'm37', t: '雷神 3：诸神黄昏', c: '电影', d: '2017-11-03', desc: '雷神家园被毁与绿巨人组队逃生' }
+    ]},
+    { year: '2018', items: [
+        { id: 'm41', t: '黑豹', c: '电影', d: '2018-02-16', desc: '特查拉继位守护瓦坎达对抗外敌' },
+        { id: 'm43', t: '复仇者联盟 3：无限战争', c: '电影', d: '2018-04-27', desc: '灭霸集齐宝石宇宙半数生命消失' },
+        { id: 'm46', t: '蚁人 2：黄蜂女现身', c: '电影', d: '2018-07-06', desc: '探索量子领域为复联 4 伏笔' }
+    ]},
+    { year: '2019', items: [
+        { id: 'm51', t: '惊奇队长', c: '电影', d: '2019-03-08', desc: '卡罗尔获超能力拯救地球对抗克里人' },
+        { id: 'm53', t: '复仇者联盟 4：终局之战', c: '电影', d: '2019-04-26', desc: '时空穿越逆转灭霸初代英雄谢幕' },
+        { id: 'm56', t: '蜘蛛侠：英雄远征', c: '电影', d: '2019-07-02', desc: '蜘蛛侠欧洲旅行识破神秘客阴谋' }
+    ]},
+    { year: '2021', items: [
+        { id: 'm62', t: '黑寡妇', c: '电影', d: '2021-07-09', desc: '娜塔莎·罗曼诺夫独立故事揭开叶莲娜身世' },
+        { id: 'm64', t: '尚气与十环传奇', c: '电影', d: '2021-09-03', desc: '尚气对抗父亲十环帮揭露真相' },
+        { id: 'm65', t: '永恒族', c: '电影', d: '2021-11-05', desc: '远古种族守护地球对抗变异族' },
+        { id: 'm67', t: '蜘蛛侠：英雄无归', c: '电影', d: '2021-12-17', desc: '蜘蛛侠身份曝光多元宇宙蜘蛛侠齐聚' }
+    ]},
+    { year: '2022', items: [
+        { id: 'm69', t: '奇异博士 2：疯狂多元宇宙', c: '电影', d: '2022-05-06', desc: '斯特兰奇意外开启多元宇宙' },
+        { id: 'm71', t: '雷神 4：爱与雷霆', c: '电影', d: '2022-07-08', desc: '简·福斯特成女雷神屠神者格尔现身' },
+        { id: 'm75', t: '黑豹 2：瓦坎达万岁', c: '电影', d: '2022-11-11', desc: '特查拉去世后苏睿继位对抗海底王国' }
+    ]},
+    { year: '2023', items: [
+        { id: 'm77', t: '蚁人与黄蜂女：量子狂潮', c: '电影', d: '2023-02-17', desc: '斯科特·朗一家误入量子领域遭威胁' },
+        { id: 'm78', t: '银河护卫队 3', c: '电影', d: '2023-05-05', desc: '火箭身世揭秘团队最终章救赎' },
+        { id: 'm82', t: '惊奇队长 2：惊奇联盟', c: '电影', d: '2023-11-10', desc: '三女主角量子纠缠征服者康初登场' }
+    ]},
+    { year: '2024', items: [
+        { id: 'm86', t: '死侍与金刚狼', c: '电影', d: '2024-05-31', desc: '死侍与金刚狼穿越时空合作' }
+    ]},
+    { year: '2025', items: [
+        { id: 'm90', t: '美国队长 4：勇敢新世界', c: '电影', d: '2025-02-14', desc: '猎鹰接棒盾牌对抗全球阴谋' },
+        { id: 'm92', t: '雷霆特工队', c: '电影', d: '2025-04-30', desc: '反英雄团队执行高风险任务' }
+    ]},
+    { year: 'X 战警系列', items: [
+        { id: 'x1', t: 'X 战警', c: '电影', d: '2000-07-14', desc: '变种人对抗万磁王拯救人类' },
+        { id: 'x2', t: 'X 战警 2', c: '电影', d: '2003-05-02', desc: '史崔克灭变种人计划被阻止' },
+        { id: 'x3', t: 'X 战警 3：最后之战', c: '电影', d: '2006-05-26', desc: '凤凰女黑化失控引发冲突' },
+        { id: 'x4', t: '金刚狼', c: '电影', d: '2009-05-01', desc: '金刚狼身世揭秘加入 X 团队' },
+        { id: 'x5', t: 'X 战警：第一战', c: '电影', d: '2011-06-03', desc: '年轻 X 教授与万磁王组队冷战' },
+        { id: 'x6', t: '金刚狼 2', c: '电影', d: '2013-07-26', desc: '金刚狼日本复仇失去自愈能力' },
+        { id: 'x7', t: 'X 战警：逆转未来', c: '电影', d: '2014-05-23', desc: '未来变种人被灭金刚狼重启历史' },
+        { id: 'x8', t: '死侍', c: '电影', d: '2016-02-12', desc: '韦德·威尔逊实验变异暴力复仇' },
+        { id: 'x9', t: 'X 战警：天启', c: '电影', d: '2016-05-27', desc: '初代变种人天启苏醒灭世危机' },
+        { id: 'x10', t: '金刚狼 3：殊死一战', c: '电影', d: '2017-03-03', desc: '暮年金刚狼保护变种人少女' },
+        { id: 'x11', t: '死侍 2', c: '电影', d: '2018-05-18', desc: '死侍组建 X 特遣队拯救少年变种人' },
+        { id: 'x12', t: 'X 战警：黑凤凰', c: '电影', d: '2019-06-07', desc: '琴·葛雷能量失控争夺凤凰之力' },
+        { id: 'x13', t: '新变种人', c: '电影', d: '2020-08-28', desc: '年轻变种人被困精神病院对抗威胁' }
+    ]},
+    { year: '神奇四侠', items: [
+        { id: 'f1', t: '神奇四侠', c: '电影', d: '2005-07-08', desc: '四位科学家获得超能力对抗毁灭博士' },
+        { id: 'f2', t: '神奇四侠 2', c: '电影', d: '2007-06-15', desc: '对抗外星威胁银影侠与行星吞噬者' },
+        { id: 'f3', t: '新神奇四侠', c: '电影', d: '2015-08-07', desc: '青年科学家实验失控对抗毁灭博士' }
+    ]}
+];
+
+let marvelWatched = JSON.parse(localStorage.getItem('marvelWatched') || '{"u1": {}, "u2": {}}');
+if (Array.isArray(marvelWatched.u1)) { marvelWatched = {"u1": {}, "u2": {}}; } // 迁移老数据
+let currentMarvelFilter = 'all';
+
+function renderMarvel() {
+    const container = document.getElementById('marvel-timeline');
+    if(!container) return;
+    container.innerHTML = '';
+    marvelData.forEach(group => {
+        let yearItems = group.items;
+        if (currentMarvelFilter === 'watched') {
+            yearItems = yearItems.filter(item => (marvelWatched.u1 && marvelWatched.u1[item.id]) || (marvelWatched.u2 && marvelWatched.u2[item.id]));
+        } else if (currentMarvelFilter === 'unwatched') {
+            yearItems = yearItems.filter(item => !(marvelWatched.u1 && marvelWatched.u1[item.id]) && !(marvelWatched.u2 && marvelWatched.u2[item.id]));
+        }
+        if (yearItems.length === 0) return;
+        const yearWrap = document.createElement('div');
+        yearWrap.className = 'marvel-year-group';
+        yearWrap.innerHTML = `<div class="marvel-year-title">${group.year}</div>`;
+        const list = document.createElement('div');
+        list.className = 'marvel-list';
+        yearItems.forEach(item => {
+            const rec1 = marvelWatched.u1 ? marvelWatched.u1[item.id] : null;
+            const rec2 = marvelWatched.u2 ? marvelWatched.u2[item.id] : null;
+            const card = document.createElement('div');
+            card.className = `m-card ${rec1 && rec2 ? 'watched-both' : ''}`;
+            
+            let recordsHtml = '';
+            if(rec1 || rec2) {
+                recordsHtml = '<div class="m-record-box">';
+                if(rec1) {
+                    recordsHtml += `
+                        <div class="m-record-item">
+                            <div class="m-record-user"><span class="u-n">李春波</span> <span class="m-record-date">${rec1.date}</span></div>
+                            <div class="m-record-stars">${'★'.repeat(rec1.score)}${'☆'.repeat(5-rec1.score)}</div>
+                            ${rec1.note ? `<div class="m-record-note">${rec1.note}</div>` : ''}
+                            <div class="m-del-record" onclick="event.stopPropagation(); removeMarvelRecord('${item.id}', 'u1')">✕</div>
+                        </div>`;
+                }
+                if(rec2) {
+                    recordsHtml += `
+                        <div class="m-record-item">
+                            <div class="m-record-user"><span class="u-p">50</span> <span class="m-record-date">${rec2.date}</span></div>
+                            <div class="m-record-stars">${'★'.repeat(rec2.score)}${'☆'.repeat(5-rec2.score)}</div>
+                            ${rec2.note ? `<div class="m-record-note">${rec2.note}</div>` : ''}
+                            <div class="m-del-record" onclick="event.stopPropagation(); removeMarvelRecord('${item.id}', 'u2')">✕</div>
+                        </div>`;
+                }
+                recordsHtml += '</div>';
+            }
+
+            card.innerHTML = `
+                <div class="m-card-top">
+                    <div class="m-info">
+                        <div class="m-title-row">
+                            <span class="m-type">${item.c}</span>
+                            <div class="m-title">${item.t}</div>
+                        </div>
+                        <div class="m-meta">📅 ${item.d}</div>
+                    </div>
+                    <div class="m-checks">
+                        <div class="m-check-btn ${rec1 ? 'on on-user' : ''}" onclick="event.stopPropagation(); addMarvelRecord('${item.id}', 'u1')">
+                            <span class="m-check-label">李春波</span>
+                        </div>
+                        <div class="m-check-btn ${rec2 ? 'on on-partner' : ''}" onclick="event.stopPropagation(); addMarvelRecord('${item.id}', 'u2')">
+                            <span class="m-check-label">50</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="marvel-desc-area">${item.desc}</div>
+                ${recordsHtml}
+            `;
+            list.appendChild(card);
+        });
+        yearWrap.appendChild(list);
+        container.appendChild(yearWrap);
+    });
+    updateMarvelStats();
+}
+
+let currentMRecord = { id: null, user: null, score: 5 };
+
+function addMarvelRecord(id, user) {
+    if(marvelWatched[user] && marvelWatched[user][id]) return;
+    
+    currentMRecord = { id: id, user: user, score: 5 };
+    document.getElementById('m-modal-title').textContent = user === 'u1' ? '李春波 的观影点评' : '50 的观影点评';
+    document.getElementById('m-modal-note').value = '';
+    setMStar(5);
+    document.getElementById('marvel-modal').classList.add('show');
+}
+
+function setMStar(n) {
+    currentMRecord.score = n;
+    const spans = document.querySelectorAll('.m-modal-stars span');
+    spans.forEach((s, idx) => {
+        if(idx < n) s.className = 'active';
+        else s.className = '';
+    });
+}
+
+function closeMModal() {
+    document.getElementById('marvel-modal').classList.remove('show');
+}
+
+function saveMRecord() {
+    const note = document.getElementById('m-modal-note').value;
+    const { id, user, score } = currentMRecord;
+    const now = new Date();
+    const dateStr = `${now.getMonth()+1}月${now.getDate()}日`;
+    
+    if(!marvelWatched[user]) marvelWatched[user] = {};
+    marvelWatched[user][id] = {
+        score: score,
+        note: note ? note.trim() : '',
+        date: dateStr,
+        ts: now.getTime()
+    };
+    
+    localStorage.setItem('marvelWatched', JSON.stringify(marvelWatched));
+    closeMModal();
+    renderMarvel();
+}
+
+function removeMarvelRecord(id, user) {
+    if(confirm('确定要删除这条观影记录吗？')) {
+        if(marvelWatched[user]) {
+            delete marvelWatched[user][id];
+            localStorage.setItem('marvelWatched', JSON.stringify(marvelWatched));
+            renderMarvel();
+        }
+    }
+}
+
+function toggleMarvel(id, user) {
+    // 废弃，改用 addMarvelRecord
+}
+
+function filterMarvel(type, btn) {
+    currentMarvelFilter = type;
+    document.querySelectorAll('.m-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMarvel();
+}
+
+function updateMarvelStats() {
+    let total = 0;
+    marvelData.forEach(g => total += g.items.length);
+    
+    const u1Keys = Object.keys(marvelWatched.u1 || {});
+    const u2Keys = Object.keys(marvelWatched.u2 || {});
+    
+    const commonSet = new Set([...u1Keys, ...u2Keys]);
+    const commonCount = commonSet.size;
+    const progress = Math.round((commonCount / total) * 100);
+    
+    const countEl = document.getElementById('marvel-common-text');
+    const barEl = document.getElementById('marvel-main-bar');
+    if(countEl) countEl.textContent = `共同激活瞬间 ${commonCount}/${total}`;
+    if(barEl) barEl.style.width = progress + '%';
+    
+    const p1El = document.getElementById('marvel-user-p1');
+    const p2El = document.getElementById('marvel-user-p2');
+    if(p1El) p1El.innerHTML = `${Math.round((u1Keys.length / total) * 100)}<span>%</span>`;
+    if(p2El) p2El.innerHTML = `${Math.round((u2Keys.length / total) * 100)}<span>%</span>`;
+}
+
 // === 模块导航系统 ===
 function openModule(name) {
-    // 隐藏模块入口网格
     document.getElementById('moduleGrid').style.display = 'none';
-    // 隐藏所有模块页面
     document.querySelectorAll('.module-page').forEach(p => p.classList.remove('show'));
-    // 显示目标模块
     const target = document.getElementById('module-' + name);
     if(target) {
         target.classList.add('show');
-        // 滚到顶部
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        if(name === 'marvel') renderMarvel();
     }
 }
 function closeModule() {
-    // 隐藏所有模块页面
     document.querySelectorAll('.module-page').forEach(p => p.classList.remove('show'));
-    // 显示模块入口网格
     document.getElementById('moduleGrid').style.display = '';
-    // 滚到模块网格位置
     setTimeout(() => {
         document.getElementById('moduleGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
